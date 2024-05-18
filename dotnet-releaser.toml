@@ -1,0 +1,5 @@
+[msbuild]
+project = "NotifyDotMoeExport.sln"
+[github]
+user = "kitsumed"
+repo = "notify.moe-exporter"
