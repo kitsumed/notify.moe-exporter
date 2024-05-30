@@ -5,7 +5,7 @@ This project is a c# winform application allow users to export their [notify.moe
 ## Download
 You can download the latest release [**here**](https://github.com/kitsumed/notify.moe-exporter/releases/latest/download/Release.zip).
 ## Usage
-Notify.moe-exporter requires a som files to work, these steps will guide you through the process :
+Notify.moe-exporter requires some files to work, these steps will guide you through the process :
 > [!NOTE]
 > Although the application can retrieve your anime list for you, anime defined as private will not be included in the export, so it is recommend that you download the files from your settings.
 1. Download your notify anime list. This can be done in the app itself or by going on [notify.moe](https://notify.moe) under `Settings>Accounts>Export>Export as JSON`
