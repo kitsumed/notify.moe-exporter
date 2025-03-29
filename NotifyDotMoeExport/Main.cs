@@ -338,11 +338,15 @@ namespace NotifyDotMoeExport
                         // Assume the anime only have dates if it's not a planned status
                         if (currentList.items[i].status != AnimeEnums.NotifyStatus.planned)
                         {
-                            /* NOTE :
+							/* NOTE :
                              * We use Where insead of SingleOrDefault since NotifyActivityConsumeAnime sometimes have duplicates entry that match all conditions.
                              * OrderBy re-order all the Activity matching from the oldest date to the most recent.
+                             * 
+                             * NOTE MISSING DATE: Sometimes, the activity cannot be found, I have "no clue of why", after manually reading the ActivityConsume DAT file, some activity update are just not existing,
+                             * my guess is a server side issue where activity are not created in the DB. I originally also through it could be a manual cleanup but activities dates goes are old as 2019 and the issue
+                             * also happen with anime updated after that date, so this is unlikely.
                              */
-                            currentList.items[i].watchedDate = userActivity.Where(activity => activity.animeID == currentList.items[i].animeID && activity.fromEpisode == 1 && activity.toEpisode >= 1)
+							currentList.items[i].watchedDate = userActivity.Where(activity => activity.animeID == currentList.items[i].animeID && activity.fromEpisode == 1 && activity.toEpisode >= 1)
                                                                             .OrderBy(activity => activity.created)
                                                                             .DefaultIfEmpty(null)
                                                                             .First()?.created;
@@ -545,7 +549,7 @@ namespace NotifyDotMoeExport
                                     ["query"] = AnilistAPIQuery,
                                     ["variables"] = new JObject
                                     {
-                                        ["mediaId"] = int.Parse(currentItemAnilistID),
+										["mediaId"] = int.Parse(currentItemAnilistID),
                                         ["status"] = currentItemStatus,
                                         ["score"] = (int)((Math.Round(currentList.items[i].rating.overall,2) / 10.0) * 100), // Take decimal 0/10 notify score and convert it to a 0/100 int
                                         ["progress"] = currentList.items[i].watchedEpisodes,
@@ -554,7 +558,8 @@ namespace NotifyDotMoeExport
                                         ["notes"] = currentList.items[i].notes,
                                         ["startedAt"] = new JObject
                                         {
-                                            ["year"] = currentList.items[i].watchedDate.GetValueOrDefault().Year,
+											// Note: If the app fail to locate some dates from the activity DB, default value will set 1000-01-01 year
+											["year"] = currentList.items[i].watchedDate.GetValueOrDefault().Year,
                                             ["month"] = currentList.items[i].watchedDate.GetValueOrDefault().Month,
                                             ["day"] = currentList.items[i].watchedDate.GetValueOrDefault().Day
                                         },
