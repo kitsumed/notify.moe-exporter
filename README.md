@@ -1,3 +1,7 @@
+>[!IMPORTANT]
+># This repo has been archived on 2025-12-23.
+> **Notify.moe has not been under active development for several years now**, and is in an "end of life"/"stale" support state with only critical updates. This repo should still work but will likely no longer be maintained (**as there is nothing to maintain**). In the future, **changes to Anilist API may also break this app**. Anilist current owner did state multiples times that API changes where planned, but they seems to be far away, if it ever happen. If you happen to have API Export issue, you may still want to try out the XML export option and then import the file using Anilist MAL importer.
+
 # notify.moe-exporter
 This project is a c# winform application allow users to export their [notify.moe](https://notify.moe) list to a mal formatted XML file for anilist import or directly trought anilist API.
 > [!WARNING]
